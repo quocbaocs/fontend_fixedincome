@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import TreasuryYieldList from './components/treaty_yeld_list'
+class App extends Component{
+  state={
+    api : [] 
+  }
+  componentDidMount(){
+    fetch('http://127.0.0.1:8000/bondapi/apibond/',{
+      method:'GET',
+      headers:{
+        'Authorization': 'Token a583a1072317997163a008ff21f3d40c51b06c61'
+      }
+    }).then( resp =>resp.json())
+    .then( res => this.setState({api: res}))
+    .catch( error => console.log(error))
+  }
+  render(){
+    return (
+      <div className="App">
+        <header className="App-header">
+          <h1>Treasury Yield : Tiền lời</h1>
+          <TreasuryYieldList api={this.state.api}/>
+        </header>
+      </div>
+    );
+  }
+  
 }
 
 export default App;
