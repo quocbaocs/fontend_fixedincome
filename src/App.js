@@ -6,10 +6,10 @@ class App extends Component{
     api : [] 
   }
   componentDidMount(){
-    fetch('http://127.0.0.1:8000/bondapi/apibond/',{
+    fetch('https://djangoappjson.herokuapp.com/fixincome/apibond/',{
       method:'GET',
       headers:{
-        'Authorization': 'Token a583a1072317997163a008ff21f3d40c51b06c61'
+        'Authorization': 'Token 7c2537cd132bc08f54fed1811e5abecb6e0c59b8'
       }
     }).then( resp =>resp.json())
     .then( res => this.setState({api: res}))
